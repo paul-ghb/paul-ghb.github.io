@@ -418,14 +418,156 @@ de nouveaux défis techniques tout en recherchant toujours un design élégant.
 
 © 2026 S.P, Inc
 
+<section id="espace-membre">
+
+<h2 class="title">Espace membre</h2>
+
+<div class="about">
+
+<input
+type="email"
+id="email"
+placeholder="Votre email">
+
+<br><br>
+
+<input
+type="password"
+id="password"
+placeholder="Votre mot de passe">
+
+<br><br>
+
+<button onclick="register()">
+Créer un compte
+</button>
+
+<button onclick="login()">
+Connexion
+</button>
+
+<button onclick="logout()">
+Déconnexion
+</button>
+
+<p id="status"></p>
+
+</div>
+
+</section>
+    
 </footer>
+<script type="module">
 
-</body>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signOut,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyAK9nRCq3hvUosSB-CiQOnizSix735LUUk",
+
+authDomain: "paulghb-638bf.firebaseapp.com",
+
+projectId: "paulghb-638bf",
+
+storageBucket: "paulghb-638bf.firebasestorage.app",
+
+messagingSenderId: "577392407480",
+
+appId: "1:577392407480:web:a1392b72f3460b4606154d",
+
+measurementId: "G-K689C4XEL8"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+window.register = async () => {
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+try{
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+document.getElementById("status").innerHTML =
+"✅ Compte créé";
+
+}catch(error){
+
+document.getElementById("status").innerHTML =
+error.message;
+
+}
+
+};
+
+window.login = async () => {
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+document.getElementById("status").innerHTML =
+"✅ Connexion réussie";
+
+}catch(error){
+
+document.getElementById("status").innerHTML =
+error.message;
+
+}
+
+};
+
+window.logout = async () => {
+
+await signOut(auth);
+
+};
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+document.getElementById("status").innerHTML =
+" Bienvenue " + user.email;
+
+}
+
+});
+
+</script>
+</body> 
 </html>
-
-background:#081120;
-backdrop-filter:blur(20px);
-Cormorant Garamond
-Inter
-transition:.4s ease;
-transform:translateY(-10px);
