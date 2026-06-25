@@ -617,3 +617,37 @@ document.getElementById("status").innerHTML =
   const analytics = getAnalytics(app);
 
 </script>
+
+/* Texte toujours blanc */
+body {
+  color: white;
+  font-family: Arial, sans-serif;
+  transition: background 0.3s ease;
+}
+
+/* Mode sombre */
+body.dark {
+  background-color: #121212;
+}
+
+/* Mode clair */
+body.light {
+  background-color: #f5f5f5;
+  color: white; /* reste blanc comme demandé */
+}
+
+/* Bouton */
+button {
+  padding: 10px 15px;
+  margin: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+const button = document.getElementById("themeToggle");
+
+button.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  document.body.classList.toggle("light");
+});
